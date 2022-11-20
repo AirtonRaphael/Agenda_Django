@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+        <div id="login">
+            <form action="submit" method="post" class="card">
+                {% csrf_token %}
+                <section class="card">
+                    <h1>Login</h1>
+                </section>
+                <section class="card-content">
+                    <section class="card-content-area">
+                        <label for="usuario">Usuário</label>
+                        <input type="text"  id="usuario" name="usuario" autocomplete="off" required>
+                    </section>
+                    <section class="card-content-area">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="password" name="password" autocomplete="off" required>
+                    </section>
+                </section>
+                <section class="card-footer">
+                    <input type="submit" value="login">
+                    <a href="#" id="recuperar_senha">Esqueceu a senha?</a>  ||  <a href="{% url 'register' %}">registrar</a>
+                </section>
+            </form>
+            {% if messages %}
+                {% for message in messages %}
+                    <strong>Erro:</strong> {{message}}
+                {% endfor %}
+            {% endif %}
+        </div>
+</body>
+</html>

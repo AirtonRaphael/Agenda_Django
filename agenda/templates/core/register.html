@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+        <div id="login">
+            <form action="" method="post" class="card">
+                {% csrf_token %}
+                <section class="card">
+                    <h1>Registro</h1>
+                </section>
+                <main class="card-content">
+                    <section class="card-content-area">
+                        <label for="usuario">Usuário</label>
+                        <input type="text"  id="usuario" name="usuario" autocomplete="off" required>
+                    </section>
+                    <section class="card-content-area">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" required>
+                    </section>
+                    <section class="card-content-area">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="password" name="password" autocomplete="off" required>
+                    </section>
+                </main>
+                <footer class="card-footer">
+                    <input type="submit" value="registrar">
+                </footer>
+            </form>
+
+        </div>
+</body>
+</html>

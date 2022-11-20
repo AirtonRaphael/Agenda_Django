@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Evento(models.Model):
     titulo = models.CharField(max_length=100)
-    descrição = models.TextField(blank=True, null=True)
+    descricao = models.TextField(blank=True, null=True, max_length=300)
     data_evento = models.DateTimeField()
     data_criação = models.DateTimeField(auto_now=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -15,5 +15,9 @@ class Evento(models.Model):
     def __str__(self):
         return self.titulo
 
+
     def get_data_evento(self):
         return self.data_evento.strftime('%d/%m/%Y %H:%M')
+
+    def get_data_input_evento(self):
+        return self.data_evento.strftime('%Y-%m-%dT%H:%M')

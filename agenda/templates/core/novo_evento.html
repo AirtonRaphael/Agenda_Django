@@ -1,0 +1,27 @@
+{% extends 'core/index.html'%}
+{% block main %}
+    <h1>Evento</h1>
+    <section class="registro_evento">
+        <form action="" method="post">
+            {% csrf_token %}
+            <section class="section_dados">
+                <input type="text" value="{{evento.id}}" name="evento_id" hidden>
+                <label for="titulo_evento">Nome do evento</label>
+                <input type="text" name="titulo" id="titulo_evento" value="{{evento.titulo}}" required>
+            </section>
+            <section class="section_dados">
+                <label for="descricao_evento">Descrição do evento</label><br>
+                <textarea name="descricao_evento" id="descricao_evento" cols="30" rows="10">{{evento.descricao}}</textarea>
+            </section>
+            <section class="section_dados">
+                <label for="data_evento">Data do evento</label>
+                <input type="datetime-local" name="data_evento" id="data_evento" value="{{evento.get_data_input_evento}}" required >
+            </section>
+            <section class="submit">
+                <input type="submit" value="Confirmar">
+                <a href="{% url 'index'%}"><input type="button" value="Cancelar"></a>
+            </section>
+        </form>
+    </section>
+
+{% endblock %}
