@@ -3,16 +3,22 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.http.response import Http404
 
 from .models import Evento
+from datetime import datetime, timedelta
 
 
 # Create your views here.
 
 @login_required(login_url='login')
 def index(request):
+    data_atual = datetime.now() - timedelta(hours=1)
     usuario = request.user
-    evento = Evento.objects.filter(usuario=usuario)
+    evento = Evento.objects.filter(usuario=usuario,
+                                    data_evento__gte=data_atual)
+
+
     return render(request, 'core/index.html', {
         'eventos': evento,  
     }) 
@@ -84,7 +90,11 @@ def logout_user(request):
 @login_required(login_url='login')
 def delete_evento(request, id_evento):
     usuario = request.user
-    evento = get_object_or_404(Evento, pk=id_evento)
-    if evento.usuario == usuario:
-        evento.delete()
+    try:
+        evento = get_object_or_404(Evento, pk=id_evento)
+        if evento.usuario == usuario:
+            evento.delete()
+    except Exception as error:
+        raise Http404("Pagina não encontrada")
+
     return redirect('/')

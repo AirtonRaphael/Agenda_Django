@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +23,7 @@
         <div>
             <ul>
                 {% for evento in eventos %}
-                    <li> {{evento.titulo}} - {{evento.get_data_evento}}  ( <a href="{%url 'detalhes' evento.id %}">Editar</a> || <a href="{% url 'delete' evento.id %}">Excluir</a> )</li>
+                    <li {%if evento.is_late%}style="color:red"{%endif%}> {{evento.titulo}} - {{evento.get_data_evento}}  ( <a href="{%url 'detalhes' evento.id %}">Editar</a> || <a href="{% url 'delete' evento.id %}">Excluir</a> )</li>
                 {%endfor%}
             </ul>
         </div> 
